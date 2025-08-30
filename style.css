@@ -1,0 +1,385 @@
+  :root {
+            --bg-primary: #0f0d0b;
+            --bg-container: #121212;
+            --bg-header: #1e1e1e;
+            --bg-row: #1e1e1e;
+            --bg-form: #1e1e1e;
+            --text-primary: #FFD36E;
+            --text-secondary: #FFFFFF;
+            --text-muted: #C7D2A8;
+            --btn-bg: #2b2b2b;
+            --btn-hover: #3a3a3a;
+            --btn-active: #FFD36E;
+            --border-color: #333;
+            --shadow: rgba(255, 211, 110, 0.1);
+            --manual-bg: #2e4c2e;
+            --manual-border: #4CAF50;
+            --manual-text: #C8E6C9;
+            --accent: #FFD36E;
+            --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .light-theme {
+            --bg-primary: #ffffff;
+            --bg-container: #fafafa;
+            --bg-header: #f7f7f7;
+            --bg-row: #ffffff;
+            --bg-form: #f9f9f9;
+            --text-primary: #000000;
+            --text-secondary: #000000;
+            --text-muted: #444444;
+            --btn-bg: #f5f5f5;
+            --btn-hover: #e6e6e6;
+            --btn-active: #f0b90b;
+            --border-color: #eaecef;
+            --shadow: rgba(0, 0, 0, 0.06);
+            --manual-bg: #fff9e6;
+            --manual-border: #f0b90b;
+            --manual-text: #000000;
+            --accent: #f0b90b;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            min-height: 100vh;
+            padding: 20px;
+            transition: all 0.4s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--bg-container);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .title {
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 0.3px;
+        }
+        
+        .top-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 12px;
+            background: var(--bg-header);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        
+        .btn {
+            background: var(--btn-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 9px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn:hover {
+            background: var(--btn-hover);
+        }
+        
+        .btn.active {
+            background: var(--btn-active);
+            color: #000;
+            border-color: var(--btn-active);
+        }
+        
+        .btn i {
+            font-size: 14px;
+        }
+        
+        select.currency-select,
+        .currency-input,
+        .manual-trade-form input,
+        .manual-trade-form select {
+            background: var(--btn-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            min-width: 110px;
+            outline: none;
+        }
+        
+        .currency-input {
+            width: 150px;
+        }
+        
+        .table-container {
+            background: var(--bg-container);
+            border-radius: 8px;
+            padding: 18px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        /* تصغير خط عمود Order No. */
+        
+        .trade-row .col-number {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+        
+        .table-header {
+            display: flex;
+            background: var(--bg-header);
+            color: var(--text-primary);
+            font-weight: 600;
+            padding: 12px 0;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .table-header>div {
+            text-align: center;
+        }
+        
+        .trade-row {
+            display: flex;
+            background: var(--bg-row);
+            margin: 6px 0;
+            padding: 12px;
+            border-radius: 6px;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+        
+        .trade-row:hover {
+            background: var(--btn-hover);
+            border-color: var(--accent);
+        }
+        
+        .trade-row.manual-trade {
+            background: var(--manual-bg);
+            border: 1px solid var(--manual-border);
+        }
+        
+        .trade-row.manual-trade .order,
+        .trade-row.manual-trade .price,
+        .trade-row.manual-trade .profit {
+            color: var(--manual-text) !important;
+        }
+        
+        .trade-row>div {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        
+        .trade-row .order {
+            color: var(--text-muted);
+        }
+        
+        .trade-row .price,
+        .trade-row .profit {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .delete-btn {
+            background: #f6465d;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .delete-btn:hover {
+            background: #d63041;
+        }
+        
+        .col-id {
+            width: 5%;
+        }
+        
+        .col-time {
+            width: 13%;
+        }
+        
+        .col-order {
+            width: 14%;
+        }
+        
+        .col-price {
+            width: 10%;
+        }
+        
+        .col-profit {
+            width: 10%;
+        }
+        
+        .col-number {
+            width: 13%;
+        }
+        
+        .col-counter {
+            width: 18%;
+        }
+        
+        .col-delete {
+            width: 7%;
+        }
+        
+        .manual-trade-form {
+            margin: 25px 0;
+            padding: 20px;
+            background: var(--bg-form);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .manual-trade-form label {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 500;
+            min-width: 70px;
+            text-align: right;
+        }
+        
+        .btn-add-manual {
+            background: var(--btn-active) !important;
+            font-weight: bold;
+            color: black !important;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+        }
+        
+        .btn-add-manual:hover {
+            background: #d9a60a !important;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 25px;
+        }
+        
+        .result-card {
+            background: var(--bg-container);
+            padding: 14px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--card-shadow);
+            transition: transform 0.2s ease;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .result-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        
+        .result-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 4px;
+        }
+        
+        .results-grid.bottom {
+            margin-top: 10px;
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        @media (max-width: 1000px) {
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            .top-bar {
+                flex-direction: column;
+            }
+            .container {
+                padding: 15px;
+            }
+            .title {
+                font-size: 24px;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+                padding: 10px;
+            }
+            .container,
+            .result-card,
+            .table-container {
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
+            }
+            .btn,
+            .top-bar,
+            .manual-trade-form {
+                display: none !important;
+            }
+            .result-value,
+            .result-label {
+                color: black !important;
+            }
+            .trade-row {
+                background: white !important;
+                color: black !important;
+                border: 1px solid #eee !important;
+            }
+            .trade-row .price,
+            .trade-row .profit {
+                color: #d35400 !important;
+            }
+        }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P2P Profit Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title" id="title">P2P Profit Calculator</h1>
+        </div>
+        <div class="top-bar">
+            <button id="loadFile" class="btn">📂 Load File</button>
+            <button id="refresh" class="btn">🔄 Refresh</button>
+            <button id="printResults" class="btn">🖨️ Print Results</button>
+            <input type="number" id="marketPrice" class="currency-input" placeholder="Market Price" step="0.0001">
+            <select id="assetCurrency" class="currency-select">
+                <option value="USDT">USDT</option>
+                <option value="BUSD">BUSD</option>
+                <!-- أضف باقي العملات إذا لزم -->
+            </select>
+            <span style="color:var(--text-primary); margin: 0 5px;">/</span>
+            <select id="fiatCurrency" class="currency-select"></select>
+            <button id="showAll" class="btn active">All Trades</button>
+            <button id="showBuys" class="btn">Buys</button>
+            <button id="showSells" class="btn">Sells</button>
+            <button id="toggleSearch" class="btn">🔍 بحث</button>
+            <input type="text" id="searchOrderNo" class="currency-input" placeholder="ابحث برقم الطلب..." style="display: none; margin: 0 10px;" />
+            <select id="language" class="btn">
+                <option value="en">English</option>
+                <option value="ar">العربية</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="es">Español</option>
+                <option value="ru">Русский</option>
+                <option value="tr">Türkçe</option>
+            </select>
+            <button id="themeToggle" class="btn">🌙 Dark Mode</button>
+        </div>
+        <div class="manual-trade-form">
+            <label for="manualOrderType">Type</label>
+            <select id="manualOrderType">
+                <option value="buy">Buy</option>
+                <option value="sell">Sell</option>
+            </select>
+            <input type="number" id="manualPrice" placeholder="Price" step="0.0001">
+            <input type="number" id="manualQty" placeholder="Quantity" step="0.0001">
+            <input type="text" id="manualCounterparty" placeholder="Counterparty">
+            <input type="text" id="manualOrderNo" placeholder="Order No.">
+            <input type="text" id="manualTime" placeholder="Time (e.g. 2025-08-22 14:36:27)">
+            <button id="addManualTrade" class="btn">➕ Add Manual</button>
+        </div>
+        <div class="table-container">
+            <div class="table-header">
+                <div class="col-id sortable" data-sort="id">ID</div>
+                <div class="col-time sortable" data-sort="time">Time</div>
+                <div class="col-order sortable" data-sort="order">Order</div>
+                <div class="col-price sortable" data-sort="price">Price</div>
+                <div class="col-profit sortable" data-sort="profit">Profit</div>
+                <div class="col-number sortable" data-sort="orderNo">Order No.</div>
+                <div class="col-counter sortable" data-sort="counterparty">Counterparty</div>
+                <div class="col-delete">Delete</div>
+            </div>
+            <div class="table-body" id="tableBody"></div>
+        </div>
+        <div class="results-grid" id="resultsGrid"></div>
+        <div class="results-grid bottom">
+            <div class="result-card">
+                <div class="result-label" id="labelLastSold">Last Sold Price</div>
+                <div class="result-value" id="lastSoldPrice">—</div>
+            </div>
+            <div class="result-card">
+                <div class="result-label" id="labelAvgBuy">Avg Buy Price (Remaining)</div>
+                <div class="result-value" id="avgBuyPrice">—</div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
