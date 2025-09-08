@@ -1,411 +1,1513 @@
-    :root {
-       --bg-primary: #0f0d0b;
-       --bg-container: #121212;
-       --bg-header: #1e1e1e;
-       --bg-row: #1e1e1e;
-       --bg-form: #1e1e1e;
-       --text-primary: #FFD36E;
-       --text-secondary: #FFFFFF;
-       --text-muted: #C7D2A8;
-       --btn-bg: #2b2b2b;
-       --btn-hover: #3a3a3a;
-       --btn-active: #FFD36E;
-       --border-color: #333;
-       --shadow: rgba(255, 211, 110, 0.1);
-       --manual-bg: #2e4c2e;
-       --manual-border: #4CAF50;
-       --manual-text: #C8E6C9;
-       --accent: #FFD36E;
-       --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-   }
-   
-   .header {
-       display: flex;
-       align-items: center;
-       padding: 10px 20px;
-       background-color: var(--header-bg);
-       border-bottom: 1px solid var(--border-color);
-   }
-   
-   .header-logo {
-       height: 40px;
-       width: auto;
-       margin-right: 15px;
-       cursor: pointer;
-   }
-   
-   .logo-link {
-       display: flex;
-       align-items: center;
-   }
-   
-   .title {
-       margin: 0;
-       font-size: 1.5rem;
-       font-weight: 600;
-   }
-   
-   .light-theme {
-       --bg-primary: #ffffff;
-       --bg-container: #fafafa;
-       --bg-header: #f7f7f7;
-       --bg-row: #ffffff;
-       --bg-form: #f9f9f9;
-       --text-primary: #000000;
-       --text-secondary: #000000;
-       --text-muted: #444444;
-       --btn-bg: #f5f5f5;
-       --btn-hover: #e6e6e6;
-       --btn-active: #f0b90b;
-       --border-color: #eaecef;
-       --shadow: rgba(0, 0, 0, 0.06);
-       --manual-bg: #fff9e6;
-       --manual-border: #f0b90b;
-       --manual-text: #000000;
-       --accent: #f0b90b;
-       --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-   }
-   
-   * {
-       margin: 0;
-       padding: 0;
-       box-sizing: border-box;
-   }
-   
-   body {
-       font-family: 'Inter', 'Segoe UI', sans-serif;
-       background: var(--bg-primary);
-       color: var(--text-secondary);
-       min-height: 100vh;
-       padding: 20px;
-       transition: all 0.4s ease;
-   }
-   
-   .container {
-       max-width: 1200px;
-       margin: 0 auto;
-       background: var(--bg-container);
-       border-radius: 12px;
-       padding: 25px;
-       box-shadow: var(--card-shadow);
-       border: 1px solid var(--border-color);
-   }
-   
-   .header {
-       text-align: center;
-       margin-bottom: 25px;
-   }
-   
-   .title {
-       font-size: 30px;
-       font-weight: 700;
-       color: var(--text-primary);
-       letter-spacing: 0.3px;
-   }
-   
-   .top-bar {
-       display: flex;
-       flex-wrap: wrap;
-       gap: 12px;
-       justify-content: center;
-       align-items: center;
-       margin-bottom: 20px;
-       padding: 12px;
-       background: var(--bg-header);
-       border: 1px solid var(--border-color);
-       border-radius: 8px;
-   }
-   
-   .btn {
-       background: var(--btn-bg);
-       color: var(--text-primary);
-       border: 1px solid var(--border-color);
-       padding: 9px 16px;
-       border-radius: 6px;
-       font-size: 14px;
-       font-weight: 600;
-       cursor: pointer;
-       transition: all 0.2s ease;
-       display: flex;
-       align-items: center;
-       gap: 6px;
-   }
-   
-   .btn:hover {
-       background: var(--btn-hover);
-   }
-   
-   .btn.active {
-       background: var(--btn-active);
-       color: #000;
-       border-color: var(--btn-active);
-   }
-   
-   .btn i {
-       font-size: 14px;
-   }
-   
-   select.currency-select,
-   .currency-input,
-   .manual-trade-form input,
-   .manual-trade-form select {
-       background: var(--btn-bg);
-       color: var(--text-primary);
-       border: 1px solid var(--border-color);
-       padding: 10px 12px;
-       border-radius: 6px;
-       font-size: 14px;
-       font-weight: 500;
-       min-width: 110px;
-       outline: none;
-   }
-   
-   .currency-input {
-       width: 150px;
-   }
-   
-   .table-container {
-       background: var(--bg-container);
-       border-radius: 8px;
-       padding: 18px;
-       border: 1px solid var(--border-color);
-       margin-bottom: 20px;
-       max-height: 500px;
-       overflow-y: auto;
-   }
-   /* تصغير خط عمود Order No. */
-   
-   .trade-row .col-number {
-       font-size: 12px;
-       font-weight: 500;
-       color: var(--text-muted);
-   }
-   
-   .table-header {
-       display: flex;
-       background: var(--bg-header);
-       color: var(--text-primary);
-       font-weight: 600;
-       padding: 12px 0;
-       border-radius: 6px;
-       font-size: 14px;
-   }
-   
-   .table-header>div {
-       text-align: center;
-   }
-   
-   .trade-row {
-       display: flex;
-       background: var(--bg-row);
-       margin: 6px 0;
-       padding: 12px;
-       border-radius: 6px;
-       align-items: center;
-       border: 1px solid var(--border-color);
-       transition: all 0.2s ease;
-   }
-   
-   .trade-row:hover {
-       background: var(--btn-hover);
-       border-color: var(--accent);
-   }
-   
-   .trade-row.manual-trade {
-       background: var(--manual-bg);
-       border: 1px solid var(--manual-border);
-   }
-   
-   .trade-row.manual-trade .order,
-   .trade-row.manual-trade .price,
-   .trade-row.manual-trade .profit {
-       color: var(--manual-text) !important;
-   }
-   
-   .trade-row>div {
-       text-align: center;
-       color: var(--text-secondary);
-   }
-   
-   .trade-row .order {
-       color: var(--text-muted);
-   }
-   
-   .trade-row .price,
-   .trade-row .profit {
-       color: var(--text-primary);
-       font-weight: 600;
-   }
-   
-   .delete-btn {
-       background: #f6465d;
-       border: none;
-       padding: 6px 10px;
-       border-radius: 4px;
-       color: #fff;
-       cursor: pointer;
-       font-weight: bold;
-       transition: background 0.3s;
-   }
-   
-   .delete-btn:hover {
-       background: #d63041;
-   }
-   
-   .col-id {
-       width: 5%;
-   }
-   
-   .col-time {
-       width: 13%;
-   }
-   
-   .col-order {
-       width: 14%;
-   }
-   
-   .col-price {
-       width: 10%;
-   }
-   
-   .col-profit {
-       width: 10%;
-   }
-   
-   .col-number {
-       width: 13%;
-   }
-   
-   .col-counter {
-       width: 18%;
-   }
-   
-   .col-delete {
-       width: 7%;
-   }
-   
-   .manual-trade-form {
-       margin: 25px 0;
-       padding: 20px;
-       background: var(--bg-form);
-       border-radius: 10px;
-       border: 1px solid var(--border-color);
-       display: flex;
-       flex-wrap: wrap;
-       gap: 12px;
-       align-items: center;
-       justify-content: center;
-   }
-   
-   .manual-trade-form label {
-       color: var(--text-muted);
-       font-size: 13px;
-       font-weight: 500;
-       min-width: 70px;
-       text-align: right;
-   }
-   
-   .btn-add-manual {
-       background: var(--btn-active) !important;
-       font-weight: bold;
-       color: black !important;
-       padding: 10px 20px;
-       border: none;
-       border-radius: 6px;
-   }
-   
-   .btn-add-manual:hover {
-       background: #d9a60a !important;
-   }
-   
-   .results-grid {
-       display: grid;
-       grid-template-columns: repeat(4, 1fr);
-       gap: 16px;
-       margin-top: 25px;
-   }
-   
-   .result-card {
-       background: var(--bg-container);
-       padding: 14px;
-       border-radius: 8px;
-       text-align: center;
-       border: 1px solid var(--border-color);
-       box-shadow: var(--card-shadow);
-       transition: transform 0.2s ease;
-   }
-   
-   .result-card:hover {
-       transform: translateY(-3px);
-   }
-   
-   .result-label {
-       font-size: 12px;
-       color: var(--text-muted);
-       text-transform: uppercase;
-   }
-   
-   .result-value {
-       font-size: 18px;
-       font-weight: 700;
-       color: var(--text-primary);
-       margin-top: 4px;
-   }
-   
-   .results-grid.bottom {
-       margin-top: 10px;
-       grid-template-columns: repeat(2, 1fr);
-   }
-   
-   @media (max-width: 1000px) {
-       .results-grid {
-           grid-template-columns: repeat(2, 1fr);
-       }
-   }
-   
-   @media (max-width: 600px) {
-       .results-grid {
-           grid-template-columns: 1fr;
-       }
-       .top-bar {
-           flex-direction: column;
-       }
-       .container {
-           padding: 15px;
-       }
-       .title {
-           font-size: 24px;
-       }
-   }
-   
-   @media print {
-       body {
-           background: white !important;
-           color: black !important;
-           padding: 10px;
-       }
-       .container,
-       .result-card,
-       .table-container {
-           box-shadow: none !important;
-           border: 1px solid #ccc !important;
-       }
-       .btn,
-       .top-bar,
-       .manual-trade-form {
-           display: none !important;
-       }
-       .result-value,
-       .result-label {
-           color: black !important;
-       }
-       .trade-row {
-           background: white !important;
-           color: black !important;
-           border: 1px solid #eee !important;
-       }
-       .trade-row .price,
-       .trade-row .profit {
-           color: #d35400 !important;
-       }
-   }
+/* style.css */
+
+
+/* Base styles */
+
+:root {
+    --font-family: 'Inter', sans-serif;
+    --transition: all 0.3s ease;
+}
+
+
+/* Default Theme (Dark) */
+
+body {
+    --bg-primary: #121826;
+    --bg-secondary: #1e293b;
+    --bg-card: #1e293b;
+    --bg-table-header: #1e293b;
+    --bg-table-row: #121826;
+    --bg-table-row-hover: #2d3748;
+    --bg-input: #1e293b;
+    --bg-button: #3b82f6;
+    --bg-button-hover: #2563eb;
+    --bg-button-secondary: #4b5563;
+    --bg-button-secondary-hover: #374151;
+    --bg-pagination: #1e293b;
+    --text-primary: #e0e6f1;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --text-button: #ffffff;
+    --text-button-secondary: #e0e6f1;
+    --border-color: #334155;
+    --border-radius: 8px;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --positive: #10b981;
+    --negative: #ef4444;
+    --warning: #f59e0b;
+    font-family: var(--font-family);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+}
+
+body.light-theme {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #e2e8f0;
+    --bg-card: #ffffff;
+    --bg-table-header: #f1f5f9;
+    --bg-table-row: #ffffff;
+    --bg-table-row-hover: #f1f5f9;
+    --bg-input: #ffffff;
+    --bg-button: #3b82f6;
+    --bg-button-hover: #2563eb;
+    --bg-button-secondary: #94a3b8;
+    --bg-button-secondary-hover: #64748b;
+    --bg-pagination: #e2e8f0;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --text-button: #ffffff;
+    --text-button-secondary: #1e293b;
+    --border-color: #cbd5e1;
+    --border-radius: 8px;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --positive: #10b981;
+    --negative: #ef4444;
+    --warning: #f59e0b;
+    direction: rtl;
+}
+
+
+/* Blue Theme */
+
+body.blue-theme {
+    --bg-primary: #e3f2fd;
+    --bg-secondary: #bbdefb;
+    --bg-card: #ffffff;
+    --bg-table-header: #e3f2fd;
+    --bg-table-row: #ffffff;
+    --bg-table-row-hover: #f0f8ff;
+    --bg-input: #ffffff;
+    --bg-button: #2196f3;
+    --bg-button-hover: #1976d2;
+    --bg-button-secondary: #bb86fc;
+    --bg-button-secondary-hover: #9a67ea;
+    --bg-pagination: #bbdefb;
+    --text-primary: #0d47a1;
+    --text-secondary: #1565c0;
+    --text-muted: #546e7a;
+    --text-button: #ffffff;
+    --text-button-secondary: #0d47a1;
+    --border-color: #90caf9;
+    --border-radius: 8px;
+    --shadow: 0 4px 6px rgba(33, 150, 243, 0.1);
+    --positive: #4caf50;
+    --negative: #f44336;
+    --warning: #ff9800;
+    direction: rtl;
+}
+
+
+/* Green Theme */
+
+body.green-theme {
+    --bg-primary: #e8f5e9;
+    --bg-secondary: #c8e6c9;
+    --bg-card: #ffffff;
+    --bg-table-header: #e8f5e9;
+    --bg-table-row: #ffffff;
+    --bg-table-row-hover: #f1f8e9;
+    --bg-input: #ffffff;
+    --bg-button: #4caf50;
+    --bg-button-hover: #388e3c;
+    --bg-button-secondary: #81c784;
+    --bg-button-secondary-hover: #66bb6a;
+    --bg-pagination: #c8e6c9;
+    --text-primary: #1b5e20;
+    --text-secondary: #2e7d32;
+    --text-muted: #546e7a;
+    --text-button: #ffffff;
+    --text-button-secondary: #1b5e20;
+    --border-color: #a5d6a7;
+    --border-radius: 8px;
+    --shadow: 0 4px 6px rgba(76, 175, 80, 0.1);
+    --positive: #00c853;
+    --negative: #d50000;
+    --warning: #ffd600;
+    direction: rtl;
+}
+
+
+/* Purple Theme */
+
+body.purple-theme {
+    --bg-primary: #f3e5f5;
+    --bg-secondary: #e1bee7;
+    --bg-card: #ffffff;
+    --bg-table-header: #f3e5f5;
+    --bg-table-row: #ffffff;
+    --bg-table-row-hover: #f8eaf6;
+    --bg-input: #ffffff;
+    --bg-button: #9c27b0;
+    --bg-button-hover: #7b1fa2;
+    --bg-button-secondary: #ce93d8;
+    --bg-button-secondary-hover: #ba68c8;
+    --bg-pagination: #e1bee7;
+    --text-primary: #4a148c;
+    --text-secondary: #6a1b9a;
+    --text-muted: #7b1fa2;
+    --text-button: #ffffff;
+    --text-button-secondary: #4a148c;
+    --border-color: #ce93d8;
+    --border-radius: 8px;
+    --shadow: 0 4px 6px rgba(156, 39, 176, 0.1);
+    --positive: #7cb342;
+    --negative: #e53935;
+    --warning: #ffb300;
+    direction: rtl;
+}
+
+
+/* Contrast Theme */
+
+body.contrast-theme {
+    --bg-primary: #000000;
+    --bg-secondary: #1a1a1a;
+    --bg-card: #000000;
+    --bg-table-header: #1a1a1a;
+    --bg-table-row: #000000;
+    --bg-table-row-hover: #333333;
+    --bg-input: #000000;
+    --bg-button: #ffffff;
+    --bg-button-hover: #cccccc;
+    --bg-button-secondary: #404040;
+    --bg-button-secondary-hover: #595959;
+    --bg-pagination: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --text-muted: #999999;
+    --text-button: #000000;
+    --text-button-secondary: #ffffff;
+    --border-color: #ffffff;
+    --border-radius: 8px;
+    --shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+    --positive: #00ff00;
+    /* Bright Green */
+    --negative: #ff0000;
+    /* Bright Red */
+    --warning: #ffff00;
+    /* Bright Yellow */
+    direction: rtl;
+}
+
+
+/* Ensure text direction is set correctly */
+
+*[dir="ltr"] {
+    direction: ltr;
+    text-align: left;
+}
+
+*[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+
+
+/* Layout */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--bg-secondary);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex-wrap: wrap;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.header-logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.navbar nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0.25rem 0;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    padding: 0.5rem 0.75rem;
+    margin: 0.15rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.nav-btn:hover {
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+}
+
+.nav-btn.active {
+    background-color: var(--bg-button);
+    color: var(--text-button);
+}
+
+.controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+
+/* تنسيقات محسنة لعلامة التبويب Analysis */
+
+
+/* 1. تأكد من أن التبويب نفسه يتعامل مع المحتوى الزائد بشكل مناسب */
+
+#analysis-tab.tab-content.active {
+    /* يمنع التبويب من التوسع إلى ما لا نهاية عموديًا */
+    display: flex;
+    flex-direction: column;
+    /* يسمح بالتدرج العمودي إذا لزم الأمر (رغم أننا سنركز على العناصر الداخلية) */
+    /* overflow-y: auto; */
+    /* يمكن تفعيله إذا احتجت لتقييد ارتفاع التبويب نفسه */
+}
+
+
+/* 2. جعل الحاوية الرئيسية للتحليل مرنة */
+
+.analysis-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    /* مسافة بين العناصر */
+    flex-grow: 1;
+    /* يملأ المساحة المتاحة داخل التبويب */
+    /* إذا أردت تقييد ارتفاع هذا القسم وتضمين تمرير داخلي: */
+    /* max-height: 75vh; */
+    /* مثال: 75% من ارتفاع العرض */
+    /* overflow-y: auto; */
+    /* padding: 0.5rem; */
+    /* مساحة داخلية صغيرة إذا استخدمت التمرير */
+}
+
+
+/* 3. تحسين حاوية التحكم والاحصائيات المتقدمة */
+
+.analysis-controls,
+.advanced-stats {
+    /* يضمن عدم تجاوز العرض */
+    width: 100%;
+    box-sizing: border-box;
+    /* منع التمدد غير الضروري */
+    flex-shrink: 0;
+}
+
+
+/* 4. تحسين حاوية الرسوم البيانية */
+
+.charts-container {
+    display: grid;
+    /* تأكد من التمرير الداخلي للرسوم البيانية إذا كانت البيانات كثيرة (رغم أن Chart.js عادة ما يتعامل مع الحجم) */
+    /* ولكن هذا يساعد على تضمين الحاوية نفسها */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* ضبط الحد الأدنى لعرض البطاقة */
+    gap: 1.2rem;
+    flex-grow: 1;
+    /* يأخذ المساحة المتاحة */
+    /* إذا كانت الرسوم البيانية طويلة جدًا أو البطاقات متعددة الأعمدة: */
+    /* min-height: 0; */
+    /* يسمح للعناصر الفرعية بالتقليص */
+    /* overflow-y: auto; */
+    /* تمرير داخلي للحاوية إذا لزم */
+    width: 100%;
+    /* يملأ العرض */
+    box-sizing: border-box;
+}
+
+
+/* 5. تحسين بطاقات الرسوم البيانية */
+
+.chart-card {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 1.2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    /* ترتيب عمودي للعنوان والرسم البياني */
+    /* تأكد من عدم تجاوز الحدود */
+    width: 100%;
+    box-sizing: border-box;
+    /* منع التمدد غير المطلوب */
+    flex-shrink: 0;
+}
+
+.chart-card h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    /* يمنع العنوان من التقلص */
+}
+
+.chart-card .chart-wrapper {
+    flex-grow: 1;
+    /* يملأ المساحة المتاحة */
+    min-height: 0;
+    /* يسمح للرسم البياني بالتقليص داخل الحاوية */
+    /* تضمين تمرير داخلي للرسم البياني إذا لزم (نادرًا ما يحدث مع Chart.js) */
+    /* overflow: hidden; */
+    /* Chart.js عادةً ما يتعامل مع الحدود */
+}
+
+.chart-card canvas {
+    width: 100% !important;
+    /* يضمن ملء العرض */
+    height: 100% !important;
+    /* يضمن ملء الارتفاع */
+    max-height: 300px;
+    /* ضبط الحد الأقصى للارتفاع حسب الحاجة */
+    /* أو يمكنك تعيين ارتفاع ثابت إذا أردت: height: 250px; */
+}
+
+
+/* 6. تحسين الإحصائيات المتقدمة */
+
+.advanced-stats {
+    flex-shrink: 0;
+    /* منع التقلص */
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    /* ضبط الحد الأدنى لعرض البطاقة */
+    gap: 0.75rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.stat-card {
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    padding: 0.75rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    /* تأكد من الحجم المناسب */
+    min-width: 0;
+    /* يسمح للنص بالتقاطع إذا لزم */
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+
+/* 7. (اختياري) تقييد ارتفاع التبويب نفسه مع تمرير داخلي */
+
+
+/* استخدم هذا فقط إذا أردت منع التبويب من التوسع أبدًا */
+
+.tab-content#analysis-tab {
+    max-height: calc(100vh - 100px);
+    /* احسب ارتفاع Navbar والمargins */
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.icon-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 600;
+}
+
+.icon-btn:hover {
+    background-color: var(--bg-secondary);
+}
+
+
+/* اختصار اللغة */
+
+.container {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+
+/* أيقونة السهم */
+
+.lang-icon {
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+}
+
+
+/* القائمة المنسدلة (مخفية افتراضيًا) */
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    /* مهم للاتجاه RTL */
+    left: auto;
+    /* مهم للاتجاه RTL */
+    z-index: 1000;
+    display: none;
+    min-width: 100px;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    list-style: none;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+*/ .icon-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 600;
+}
+
+.icon-btn:hover {
+    background-color: var(--bg-input);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+    color: var(--text-primary);
+}
+
+
+/* Home Tab */
+
+.intro-text {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.8rem;
+    line-height: 1.6;
+}
+
+.mini-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 1.8rem;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 1.2rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.result-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.result-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.quick-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background-color: var(--bg-button);
+    color: var(--text-button);
+}
+
+.btn-primary:hover {
+    background-color: var(--bg-button-hover);
+}
+
+.btn-secondary {
+    background-color: var(--bg-button-secondary);
+    color: var(--text-button-secondary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-button-secondary-hover);
+}
+
+
+/* Trades Tab */
+
+.top-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    padding: 1rem;
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.currency-input,
+.currency-select {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.btn-group {
+    display: flex;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.btn-group .btn {
+    border-radius: 0;
+    border: none;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+}
+
+.btn-group .btn.active {
+    background-color: var(--bg-button);
+    color: var(--text-button);
+}
+
+.btn-group .btn:not(:last-child) {
+    border-right: 1px solid var(--border-color);
+}
+
+.date-range-picker {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.manual-trade-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    margin-bottom: 1.2rem;
+}
+
+.manual-trade-form.hidden {
+    display: none;
+}
+
+.manual-trade-form label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.manual-trade-form input,
+.manual-trade-form select {
+    flex: 1;
+    min-width: 150px;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.btn-add-manual {
+    background-color: var(--bg-button);
+    color: var(--text-button);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.btn-add-manual:hover {
+    background-color: var(--bg-button-hover);
+}
+
+
+/* Table */
+
+.table-container {
+    overflow-x: auto;
+    margin-bottom: 1.2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.table-header {
+    display: flex;
+    background-color: var(--bg-table-header);
+    padding: 1rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+    align-items: center;
+}
+
+.table-header>div {
+    flex: 1;
+    text-align: center;
+    padding: 0 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.table-header>div:last-child {
+    flex: 0 0 80px;
+}
+
+#tableBody {
+    background-color: var(--bg-table-row);
+}
+
+.trade-row {
+    display: flex;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    align-items: center;
+    transition: var(--transition);
+}
+
+.trade-row:hover {
+    background-color: var(--bg-table-row-hover);
+}
+
+.trade-row>div {
+    flex: 1;
+    text-align: center;
+    padding: 0 0.5rem;
+    word-break: break-word;
+}
+
+.trade-row>div:last-child {
+    flex: 0 0 80px;
+}
+
+.order {
+    font-weight: 500;
+}
+
+.profit.positive {
+    color: var(--positive);
+    font-weight: 600;
+}
+
+.profit.negative {
+    color: var(--negative);
+    font-weight: 600;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: var(--negative);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition);
+    padding: 0.25rem;
+    border-radius: var(--border-radius);
+}
+
+.delete-btn:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+
+/* Pagination */
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.pagination-controls button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-pagination);
+    color: var(--text-primary);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: var(--bg-input);
+}
+
+.pagination-controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* Results Grid */
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.result-card {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 1.2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.result-card .result-label {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.result-card .result-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+
+/* Analysis Tab */
+
+.analysis-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    padding: 1rem;
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.period-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.period-btn {
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.85rem;
+}
+
+.period-btn:hover {
+    background-color: var(--bg-secondary);
+}
+
+.period-btn.active {
+    background-color: var(--bg-button);
+    color: var(--text-button);
+    border-color: var(--bg-button);
+}
+
+.charts-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+.chart-card {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 1.2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.chart-card h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.advanced-stats {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 1.2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.advanced-stats h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+}
+
+.stat-card {
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    padding: 0.75rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.stat-card div:first-child {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card .stat-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+
+/* Settings Tab */
+
+.settings-form {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.setting-item {
+    margin-bottom: 1.2rem;
+}
+
+.setting-item label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.setting-item select {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.theme-switch-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.theme-switch-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.theme-switch-btn:hover {
+    background-color: var(--bg-secondary);
+}
+
+.theme-switch-btn.active {
+    background-color: var(--bg-button);
+    color: var(--text-button);
+    border-color: var(--bg-button);
+}
+
+
+/* Manual Trade Highlight */
+
+.manual-trade {
+    background-color: rgba(59, 130, 246, 0.1);
+    /* Light blue highlight */
+    border-left: 4px solid var(--bg-button);
+}
+
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 0.75rem;
+    }
+    .navbar nav {
+        order: 3;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+    .logo-link {
+        margin-bottom: 0.5rem;
+    }
+    .controls {
+        margin-top: 0.5rem;
+    }
+    .nav-btn {
+        margin: 0.15rem;
+        padding: 0.5rem;
+        font-size: 0.85rem;
+    }
+    .top-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .manual-trade-form {
+        flex-direction: column;
+    }
+    .manual-trade-form label {
+        min-width: auto;
+    }
+    .manual-trade-form input,
+    .manual-trade-form select {
+        min-width: auto;
+    }
+    .analysis-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .period-buttons {
+        justify-content: center;
+    }
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}
+
+@media (min-width: 992px) {
+    .charts-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* قسم أوقات الذروة */
+
+.peak-times-stats {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+}
+
+.peak-times-stats h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.peak-times-stats .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.peak-times-stats .stat-card {
+    background: var(--bg-secondary);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.peak-times-stats .stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.peak-times-stats .stat-card>div:first-child {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.peak-times-stats .stat-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-highlight);
+    word-break: break-word;
+}
+
+
+/* قسم ملخص الأداء الثابت */
+
+.fixed-summary-stats {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+}
+
+.fixed-summary-stats h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.fixed-summary-stats .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.fixed-summary-stats .stat-card {
+    background: var(--bg-secondary);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.fixed-summary-stats .stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.fixed-summary-stats .stat-card>div:first-child {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.fixed-summary-stats .stat-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-highlight);
+}
+
+
+/* قسم ملخص الأداء في صفحة التحليل */
+
+.performance-summary {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+}
+
+.performance-summary h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.performance-summary .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.performance-summary .stat-card {
+    background: var(--bg-secondary);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.performance-summary .stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.performance-summary .stat-card>div:first-child {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.performance-summary .stat-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-highlight);
+}
+
+
+/* تنسيق زر الملف الشخصي في الهيدر */
+
+.navbar .controls .icon-btn:nth-last-child(1) {
+    background-color: #6366f1;
+    /* بنفسجي فاتح */
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.navbar .controls .icon-btn:nth-last-child(1):hover {
+    background-color: #4f46e5;
+    /* بنفسجي أغمق */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* تأثير عند النقر */
+
+.navbar .controls .icon-btn:nth-last-child(1):active {
+    transform: translateY(0);
+}
+
+
+/* ===== تجميل قائمة اللغات المنسدلة ===== */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+/* زر القائمة المنسدلة */
+
+.themeDropdownToggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 600;
+}
+
+.themeDropdownToggle:hover {
+    background-color: var(--bg-secondary);
+}
+
+
+/* اختصار اللغة */
+
+.lang-code {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+
+/* أيقونة السهم */
+
+.lang-icon {
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+}
+
+
+/* القائمة المنسدلة (مخفية افتراضيًا) */
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    /* مهم للاتجاه RTL */
+    left: auto;
+    /* مهم للاتجاه RTL */
+    z-index: 1000;
+    display: none;
+    min-width: 100px;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    list-style: none;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.navbar .controls .icon-btn:nth-last-child(1):active {
+    transform: translateY(0);
+}
+
+
+/* ===== تجميل قائمة اللغات المنسدلة ===== */
+
+.themeDropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+/* زر القائمة المنسدلة */
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 600;
+}
+
+.dropdown-toggle:hover {
+    background-color: var(--bg-secondary);
+}
+
+
+/* اختصار اللغة */
+
+.lang-code {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+
+/* أيقونة السهم */
+
+.lang-icon {
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+}
+
+
+/* القائمة المنسدلة (مخفية افتراضيًا) */
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    /* مهم للاتجاه RTL */
+    left: auto;
+    /* مهم للاتجاه RTL */
+    z-index: 1000;
+    display: none;
+    min-width: 100px;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    list-style: none;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+
+/* عناصر القائمة */
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    clear: both;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-align: right;
+    /* RTL */
+    text-decoration: none;
+    white-space: nowrap;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: var(--bg-secondary);
+    color: var(--text-button);
+}
+
+
+/* إظهار القائمة عند النقر (يتم التحكم به عبر JavaScript) */
+
+.show {
+    display: block;
+}
+
+
+/* تدوير السهم عند فتح القائمة */
+
+.dropdown-toggle[aria-expanded="true"] .lang-icon {
+    transform: rotate(180deg);
+}
+
+
+/* Dropdown Menu Styles */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    /* لمحاذاة القائمة لليمين في الواجهة العربية */
+    background-color: var(--card-bg);
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 8px;
+    padding: 8px 0;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-item {
+    color: var(--text-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    text-align: right;
+    /* للواجهة العربية */
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: inherit;
+}
+
+.dropdown-item:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.dropdown-item i {
+    width: 20px;
+    text-align: center;
+}
