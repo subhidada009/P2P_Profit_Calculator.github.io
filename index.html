@@ -1,93 +1,313 @@
+<!-- index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>P2P Profit Calculator</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link href="  https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css  " rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3307452437743619"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3307452437743619" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <div class="header">
-            <a href="https://subhidda.netlify.app/" target="_blank" class="logo-link">
-                <img src="logo.png" alt="Logo" class="header-logo">
-            </a>
+    <header class="navbar">
+        <a href="#" class="logo-link">
+            <img src="logo.png" alt="Logo" class="header-logo">
             <h1 class="title" id="title">P2P Profit Calculator</h1>
-        </div>
-        <div class="top-bar">
-            <button id="loadFile" class="btn">📂 Load File</button>
-            <button id="refresh" class="btn">🔄 Refresh</button>
-            <button id="printResults" class="btn">🖨️ Print Results</button>
-            <input type="number" id="marketPrice" class="currency-input" placeholder="Market Price" step="0.0001">
-            <select id="assetCurrency" class="currency-select">
-                <option value="USDT">USDT</option>
-                <option value="BUSD">BUSD</option>
-                <!-- أضف باقي العملات إذا لزم -->
-            </select>
-            <span style="color:var(--text-primary); margin: 0 5px;">/</span>
-            <select id="fiatCurrency" class="currency-select"></select>
-            <button id="showAll" class="btn active">All Trades</button>
-            <button id="showBuys" class="btn">Buys</button>
-            <button id="showSells" class="btn">Sells</button>
-            <button id="toggleSearch" class="btn">🔍 بحث</button>
-            <input type="text" id="searchOrderNo" class="currency-input" placeholder="ابحث برقم الطلب..." style="display: none; margin: 0 10px;" />
-            <select id="language" class="btn">
-                <option value="en">English</option>
-                <option value="ar">العربية</option>
-                <option value="fr">Français</option>
-                <option value="de">Deutsch</option>
-                <option value="es">Español</option>
-                <option value="ru">Русский</option>
-                <option value="tr">Türkçe</option>
-            </select>
-            <button id="themeToggle" class="btn">🌙 Dark Mode</button>
-        </div>
-        <div class="manual-trade-form">
-            <label for="manualOrderType">Type</label>
-            <select id="manualOrderType">
-                <option value="buy">Buy</option>
-                <option value="sell">Sell</option>
-            </select>
-            <input type="number" id="manualPrice" placeholder="Price" step="0.0001">
-            <input type="number" id="manualQty" placeholder="Quantity" step="0.0001">
-            <input type="text" id="manualCounterparty" placeholder="Counterparty">
-            <input type="text" id="manualOrderNo" placeholder="Order No.">
-            <input type="text" id="manualTime" placeholder="Time (e.g. 2025-08-22 14:36:27)">
-            <button id="addManualTrade" class="btn">➕ Add Manual</button>
-        </div>
-        <div class="table-container">
-            <div class="table-header">
-                <div class="col-id sortable" data-sort="id">ID</div>
-                <div class="col-time sortable" data-sort="time">Time</div>
-                <div class="col-order sortable" data-sort="order">Order</div>
-                <div class="col-price sortable" data-sort="price">Price</div>
-                <div class="col-profit sortable" data-sort="profit">Profit</div>
-                <div class="col-number sortable" data-sort="orderNo">Order No.</div>
-                <div class="col-counter sortable" data-sort="counterparty">Counterparty</div>
-                <div class="col-delete">Delete</div>
+        </a>
+        <nav>
+            <button class="nav-btn active" data-tab="home">
+                <i class="fas fa-home"></i> <span id="nav-home">الرئيسية</span>
+            </button>
+            <button class="nav-btn" data-tab="trades">
+                <i class="fas fa-chart-line"></i> <span id="nav-trades">الصفقات</span>
+            </button>
+            <button class="nav-btn" data-tab="analysis">
+                <i class="fas fa-chart-pie"></i> <span id="nav-analysis">التحليل</span>
+            </button>
+            <button class="nav-btn" data-tab="settings">
+                <i class="fas fa-cog"></i> <span id="nav-settings">الإعدادات</span>
+            </button>
+        </nav>
+        <div class="controls">
+            <!-- Theme Dropdown -->
+            <div class="dropdown" id="themeDropdown">
+                <button id="themeDropdownToggle" class="icon-btn" aria-expanded="false">
+        <i class="fas fa-moon" id="themeIcon"></i>
+
+        
+                </button>
+                </button>
+                <div id="themeDropdownMenu" class="dropdown-menu">
+                    <button class="dropdown-item" data-theme="dark">
+            <i class="fas fa-moon"></i> <span>داكن</span>
+        </button>
+                    <button class="dropdown-item" data-theme="light">
+            <i class="fas fa-sun"></i> <span>فاتح</span>
+        </button>
+                    <button class="dropdown-item" data-theme="blue">
+            <i class="fas fa-tint"></i> <span>أزرق</span>
+        </button>
+                    <button class="dropdown-item" data-theme="green">
+            <i class="fas fa-leaf"></i> <span>أخضر</span>
+        </button>
+                    <button class="dropdown-item" data-theme="purple">
+            <i class="fas fa-palette"></i> <span>بنفسجي</span>
+        </button>
+                    <button class="dropdown-item" data-theme="contrast">
+            <i class="fas fa-adjust"></i> <span>تباين عالي</span>
+        </button>
+                </div>
             </div>
-            <div class="table-body" id="tableBody"></div>
-        </div>
-        <div class="results-grid" id="resultsGrid"></div>
-        <div class="results-grid bottom">
-            <div class="result-card">
-                <div class="result-label" id="labelLastSold">Last Sold Price</div>
-                <div class="result-value" id="lastSoldPrice">—</div>
+            <!-- Dropdown قائمة اللغات الجديدة -->
+            <div class="dropdown language-dropdown">
+                <button class="dropdown-toggle btn icon-btn" id="languageDropdownToggle" title="تغيير اللغة">
+                    <span class="lang-code" id="currentLangCode">AR</span>
+                    <i class="fas fa-chevron-down lang-icon"></i>
+                </button>
+                <ul class="dropdown-menu" id="languageDropdownMenu">
+                    <li><a class="dropdown-item" data-lang="en">EN</a></li>
+                    <li><a class="dropdown-item" data-lang="ar">AR</a></li>
+                    <li><a class="dropdown-item" data-lang="fr">FR</a></li>
+                    <li><a class="dropdown-item" data-lang="es">ES</a></li>
+                    <li><a class="dropdown-item" data-lang="de">DE</a></li>
+                    <li><a class="dropdown-item" data-lang="ru">RU</a></li>
+                    <li><a class="dropdown-item" data-lang="tr">TR</a></li>
+                    <li><a class="dropdown-item" data-lang="pt">PT</a></li>
+                    <li><a class="dropdown-item" data-lang="it">IT</a></li>
+                    <li><a class="dropdown-item" data-lang="zh">ZH</a></li>
+                    <li><a class="dropdown-item" data-lang="ja">JA</a></li>
+                </ul>
             </div>
-            <div class="result-card">
-                <div class="result-label" id="labelAvgBuy">Avg Buy Price (Remaining)</div>
-                <div class="result-value" id="avgBuyPrice">—</div>
+            <!-- زر جديد: ملفي الشخصي -->
+            <a href="https://subhidda.netlify.app/" target="_blank" class="btn icon-btn" title="ملفي الشخصي - للتواصل للعمل">
+                <i class="fas fa-code"></i>
+            </a>
+        </div>
+    </header>
+    <div class="container">
+        <div id="home-tab" class="tab-content active">
+            <h2 class="section-title" id="home-title">مرحباً بك في حاسبة الأرباح P2P</h2>
+            <p class="intro-text" id="home-intro">
+                هذا البرنامج مصمم لمساعدتك على تتبع أرباحك وخسائرك في تداول العملات الرقمية من شخص لشخص (P2P). يمكنك تحميل ملفات سجلات الصفقات لتحليل أدائك بشكل شامل.
+            </p>
+            <div class="mini-dashboard">
+                <div class="card">
+                    <div class="result-label" id="dashboard-today">ربح اليوم</div>
+                    <div class="result-value" id="todayProfit">0.00</div>
+                </div>
+                <div class="card">
+                    <div class="result-label" id="dashboard-week">ربح هذا الأسبوع</div>
+                    <div class="result-value" id="weekProfit">0.00</div>
+                </div>
+                <div class="card">
+                    <div class="result-label" id="dashboard-month">ربح هذا الشهر</div>
+                    <div class="result-value" id="monthProfit">0.00</div>
+                </div>
+                <div class="card">
+                    <div class="result-label" id="dashboard-remaining">الكمية المتبقية</div>
+                    <div class="result-value" id="openTrades">0</div>
+                </div>
+            </div>
+            <div class="quick-links">
+                <button class="btn btn-primary" data-action="trades-tab">
+                    <i class="fas fa-list-alt"></i> <span id="quick-trades">عرض الصفقات</span>
+                </button>
+                <button class="btn btn-secondary" data-action="analysis-tab">
+                    <i class="fas fa-chart-bar"></i> <span id="quick-analysis">الذهاب للتحليل</span>
+                </button>
+            </div>
+        </div>
+        <div id="trades-tab" class="tab-content">
+            <div class="top-bar">
+                <button id="loadFile" class="btn"><i class="fas fa-upload"></i> <span id="btn-load">تحميل ملف</span></button>
+                <button id="exportCSV" class="btn"><i class="fas fa-download"></i> <span id="btn-export">تصدير CSV</span></button>
+                <button id="printResults" class="btn"><i class="fas fa-print"></i> <span id="btn-print">طباعة</span></button>
+                <button id="clearHistory" class="btn"><i class="fas fa-trash-alt"></i> <span id="btn-clear">مسح السجل</span></button>
+                <input type="number" id="marketPrice" class="currency-input" placeholder="سعر السوق" step="0.0001">
+                <select id="assetCurrency" class="currency-select">
+                    <!-- Cryptocurrencies will be populated by JS -->
+                </select>
+                <span style="color:var(--text-muted); margin: 0 5px;">/</span>
+                <select id="fiatCurrency" class="currency-select"></select>
+                <div class="btn-group">
+                    <button id="showAll" class="btn active" data-view="all"><span id="view-all">الكل</span></button>
+                    <button id="showBuys" class="btn" data-view="buys"><span id="view-buys">شراء</span></button>
+                    <button id="showSells" class="btn" data-view="sells"><span id="view-sells">بيع</span></button>
+                </div>
+                <div id="dateRangePicker" class="date-range-picker">
+                    <input type="text" id="dateFrom" class="currency-input" placeholder="من تاريخ" readonly>
+                    <span style="color: var(--text-muted); margin: 0 5px;">→</span>
+                    <input type="text" id="dateTo" class="currency-input" placeholder="إلى تاريخ" readonly>
+                </div>
+                <select id="filterCounterparty" class="currency-select">
+                    <option value="">جميع الأطراف</option>
+                </select>
+                <input type="number" id="alertThreshold" class="currency-input" placeholder="تنبيه %" step="0.1">
+            </div>
+            <button id="toggleManualForm" class="btn-add-manual" style="margin-bottom: 20px;">
+                <i class="fas fa-plus"></i> <span id="btn-add-manual">إضافة يدوية</span>
+            </button>
+            <div class="manual-trade-form hidden">
+                <label for="manualOrderType" id="label-type">النوع:</label>
+                <select id="manualOrderType">
+                    <option value="buy" id="option-buy">شراء</option>
+                    <option value="sell" id="option-sell">بيع</option>
+                </select>
+                <label for="manualPrice" id="label-price">السعر:</label>
+                <input type="number" id="manualPrice" placeholder="السعر" step="0.0001">
+                <label for="manualQty" id="label-quantity">الكمية:</label>
+                <input type="number" id="manualQty" placeholder="الكمية" step="0.0001">
+                <label for="manualTime" id="label-time">التاريخ:</label>
+                <input type="datetime-local" id="manualTime" placeholder="التاريخ">
+                <label for="manualCounterparty" id="label-counterparty">الطرف الآخر:</label>
+                <input type="text" id="manualCounterparty" placeholder="الطرف الآخر">
+                <label for="manualOrderNo" id="label-order-no">رقم الطلب:</label>
+                <input type="text" id="manualOrderNo" placeholder="رقم الطلب">
+                <button id="addManualTrade" class="btn-add-manual">
+                    <i class="fas fa-plus"></i> <span id="btn-add">إضافة</span>
+                </button>
+            </div>
+            <div class="table-container">
+                <div class="table-header">
+                    <div class="col-id sortable" data-sort="id"><span id="th-id">الرقم</span></div>
+                    <div class="col-time sortable" data-sort="time"><span id="th-time">تاريخ</span> <i class="fas fa-sort"></i></div>
+                    <div class="col-order sortable" data-sort="order"><span id="th-order">العملية</span> <i class="fas fa-sort"></i></div>
+                    <div class="col-price sortable" data-sort="price"><span id="th-price">السعر</span> <i class="fas fa-sort"></i></div>
+                    <div class="col-profit sortable" data-sort="profit"><span id="th-profit">الربح</span> <i class="fas fa-sort"></i></div>
+                    <div class="col-number sortable" data-sort="orderNo"><span id="th-order-no">رقم المعاملة</span> <i class="fas fa-sort"></i></div>
+                    <div class="col-counter sortable" data-sort="counterparty"><span id="th-counterparty">اسم الزبون</span> <i class="fas fa-sort"></i></div>
+                    <div class="col-delete"><span id="th-delete">حذف</span></div>
+                </div>
+                <div id="tableBody"></div>
+            </div>
+            <div class="pagination-controls">
+                <button id="prevPage"><span id="pagination-prev">السابق</span></button>
+                <span id="pageInfo">صفحة 1 من 1</span>
+                <button id="nextPage"><span id="pagination-next">التالي</span></button>
+            </div>
+            <div id="resultsGrid" class="results-grid bottom"></div>
+        </div>
+        <div id="analysis-tab" class="tab-content">
+            <h2 class="section-title" id="analysis-title">📊 تحليل شامل</h2>
+            <div class="analysis-controls">
+                <p><span id="analysis-total-profit-label">إجمالي الأرباح:</span> <span id="totalProfitAnalysis">0.00</span></p>
+                <div class="period-buttons">
+                    <button class="period-btn active" data-period="all" id="period-all">الكل</button>
+                    <button class="period-btn" data-period="today" id="period-today">اليوم</button>
+                    <button class="period-btn" data-period="week" id="period-week">الأسبوع</button>
+                    <button class="period-btn" data-period="month" id="period-month">الشهر</button>
+                    <button class="period-btn" data-period="year" id="period-year">السنة</button>
+                </div>
+            </div>
+            <div class="charts-container">
+                <div class="chart-card">
+                    <h3 id="chart-profit-title">📈 الربح اليومي</h3>
+                    <canvas id="dailyProfitChart" height="220"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3 id="chart-trades-title">🥧 صفقات الشراء مقابل البيع</h3>
+                    <canvas id="tradeTypeChart" height="220"></canvas>
+                </div>
+            </div>
+            <div class="advanced-stats">
+                <h3 id="stats-title">📊 إحصائيات متقدمة</h3>
+                <h3 id="peak-times-title">⏰ أوقات الذروة</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div id="stat-max-buy">أعلى سعر شراء</div>
+                        <div id="maxBuyPrice" class="stat-value">—</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="stat-max-sell">أعلى سعر بيع</div>
+                        <div id="maxSellPrice" class="stat-value">—</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="stat-top-counterparty">أكثر طرف تداولًا</div>
+                        <div id="topCounterparty" class="stat-value">—</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="stat-avg-hold">متوسط وقت الاحتفاظ</div>
+                        <div id="avgHoldTime" class="stat-value">—</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div id="peak-buy-title">أعلى أوقات الشراء</div>
+                        <div id="peakBuyTimes" class="stat-value">جارٍ التحميل...</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="peak-sell-title">أعلى أوقات البيع</div>
+                        <div id="peakSellTimes" class="stat-value">جارٍ التحميل...</div>
+                    </div>
+                </div>
+            </div>
+            <!-- قسم جديد: ملخص الأداء (يتم حسابه ديناميكيًا) -->
+            <div class="performance-summary">
+                <h3 id="performance-summary">📊 ملخص الأداء</h3>
+                <div id="analysisResultsGrid" class="stats-grid">
+                    <!-- سيتم ملء هذا القسم تلقائيًا بواسطة JavaScript -->
+                    <div class="stat-card">
+                        <div>جارٍ التحميل...</div>
+                        <div class="stat-value">—</div>
+                    </div>
+                </div>
+            </div>
+            <!-- New Section: Peak Times -->
+        </div>
+        <div id="settings-tab" class="tab-content">
+            <h2 class="section-title" id="settings-title">⚙️ الإعدادات</h2>
+            <div class="settings-form">
+                <div class="setting-item">
+                    <label for="languageSelect" id="label-lang">اختر اللغة:</label>
+                    <select id="languageSelect">
+                        <option value="en">English</option>
+                        <option value="ar">العربية</option>
+                        <option value="fr">Français</option>
+                        <option value="es">Español</option>
+                        <option value="de">Deutsch</option>
+                        <option value="ru">Русский</option>
+                        <option value="tr">Türkçe</option>
+                        <option value="pt">Português</option>
+                        <option value="it">Italiano</option>
+                        <option value="zh">中文</option>
+                        <option value="ja">日本語</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label id="label-theme">تغيير المظهر:</label>
+                    <div class="theme-switch-container">
+                        <button class="theme-switch-btn active" data-theme="dark">
+                            <i class="fas fa-moon"></i> <span id="theme-dark">داكن</span>
+                        </button>
+                        <button class="theme-switch-btn" data-theme="light">
+                            <i class="fas fa-sun"></i> <span id="theme-light">فاتح</span>
+                        </button>
+                        <button class="theme-switch-btn" data-theme="blue">
+                            <i class="fas fa-tint"></i> <span id="theme-blue">أزرق</span>
+                        </button>
+                        <button class="theme-switch-btn" data-theme="green">
+                            <i class="fas fa-leaf"></i> <span id="theme-green">أخضر</span>
+                        </button>
+                        <button class="theme-switch-btn" data-theme="purple">
+                            <i class="fas fa-palette"></i> <span id="theme-purple">بنفسجي</span>
+                        </button>
+                        <button class="theme-switch-btn" data-theme="contrast">
+                            <i class="fas fa-adjust"></i> <span id="theme-contrast">تباين عالي</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="script.js"></script>
 </body>
 
 </html>
-
